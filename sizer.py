@@ -1,6 +1,12 @@
 import pandas as pd
 import numpy as np
 
+"""
+Module to balance the data set, looks for sample differences and samples down to a reasonable distribution of samples across feature column
+"""
+
+
+
 def create_balanced_sample(input_file, output_file, n_samples=500):
  
     df = pd.read_csv(input_file)
