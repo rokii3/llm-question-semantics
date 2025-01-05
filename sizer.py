@@ -7,10 +7,15 @@ Module to balance the data set, looks for sample differences and samples down to
 
 
 
-def create_balanced_sample(input_file, output_file, n_samples=500):
+def create_balanced_sample(input_file, output_file, n_samples='all'): # or custom integer 0 < n =< len(df)
+
  
     df = pd.read_csv(input_file)
     
+    full_dataset = len(df)
+    if n_samples == 'all':
+        n_samples = full_dataset
+
     lang_dist = df['language'].value_counts(normalize=True)
     
     # Initialize empty dataframe for results
@@ -23,7 +28,9 @@ def create_balanced_sample(input_file, output_file, n_samples=500):
         # Get all rows for this language
         lang_df = df[df['language'] == lang]
         
-      
+        if n_samples == full_dataset:
+            n_lang_samples = len(lang_df)
+        
         sampled_lang_df = lang_df.sample(n=n_lang_samples, random_state=42)
             
         # Add to our result dataframe
@@ -48,6 +55,6 @@ def create_balanced_sample(input_file, output_file, n_samples=500):
     print(f"\nSampled dataset saved to {output_file}")
 
 if __name__ == "__main__":
-    input_file = "data/filtered_questions.csv"
-    output_file = "data/test_data.csv"
-    create_balanced_sample(input_file, output_file, n_samples=500)
+    input_file = "nllb_qpairs_filtered.csv"
+    output_file = "nllb_qpairs_all.csv"
+    create_balanced_sample(input_file, output_file, n_samples='all') # or custom integer 0 < n =< len(df)

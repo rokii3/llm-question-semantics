@@ -32,30 +32,48 @@ def prepare_multilabel_encoding(df):
 
 if __name__ == '__main__':
     # Load the test data
-    test_data = pd.read_csv("data/test_data.csv")
+    data = pd.read_csv("nllb_qpairs_all.csv")
 
     # Apply multi-label encoding
-    encoded_test_data = prepare_multilabel_encoding(test_data.copy())
+    encoded_data = prepare_multilabel_encoding(data.copy())
 
     # Save the encoded data to a CSV file
-    output_csv_path = "data/encoded_test_data.csv" # Change this if you want to save it somewhere else
-    encoded_test_data.to_csv(output_csv_path, index=False, encoding='utf-8')
+    output_csv_path = "nllb_qpairs_all_encoded.csv" # Change this if you want to save it somewhere else
+    encoded_data.to_csv(output_csv_path, index=False, encoding='utf-8')
     print(f"Encoded data saved to: {output_csv_path}")
 
 
     # Print the result
-    print(encoded_test_data.head())
+    print(encoded_data.head())
 
     # Print columns to show that the new columns are there
     print("\nNew Columns:")
-    print(encoded_test_data.columns)
+    print(encoded_data.columns)
 
     # Print the number of columns
     print("\nNumber of Columns:")
-    print(len(encoded_test_data.columns))
+    print(len(encoded_data.columns))
 
     # Show the value counts for a few selected columns
     print("\nValue counts for f1_modality:")
-    print(encoded_test_data['f1_modality'].value_counts())
+    print(encoded_data['f1_modality'].value_counts())
     print("\nValue counts for f2_polar:")
-    print(encoded_test_data['f2_polar'].value_counts())
+    print(encoded_data['f2_polar'].value_counts())
+
+    encoded_data = prepare_multilabel_encoding(data.copy())
+
+
+"""
+# Select a subset of the DataFrame if needed
+subset = encoded_data.head(8)  # Adjust the number of rows as needed
+
+# Convert the DataFrame to a LaTeX table
+latex_table = subset.to_latex(index=False, column_format='|c' * len(subset.columns) + '|', escape=False)
+
+# Save the LaTeX table to a file
+with open('encoded_data_table.tex', 'w') as f:
+    f.write(latex_table)
+
+print("LaTeX table saved to: encoded_data_table.tex")
+
+"""
