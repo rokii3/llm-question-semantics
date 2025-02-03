@@ -1,0 +1,24 @@
+# Data files
+data/
+*_embeddings_*.npy
+*.npy
+source_embeddings_miniLM.npy
+target_embeddings_miniLM.npy
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# LaTeX files
+tex/
+*.tex
+*.pdf
+*.synctex.gz
+
+# Archives
+*.zip
